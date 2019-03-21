@@ -1,10 +1,14 @@
+set -e
+
 platform=""
 if [[ `uname` == 'Linux' ]]; then
-	platform="linux"
+  platform="linux"
 elif [[ `uname` == 'Darwin' ]]; then
         platform="darwin"
 else
-	echo "sorry. this script adjust only linux or darwin."
+  echo "sorry. this script adjust only linux or darwin."
 fi
 
-curl -s https://cache.agilebits.com/dist/1P/op/pkg/v0.5.5/op_${platform}_amd64_v0.5.5.zip | tar -xf - -C . && rm op.sig 
+curl -sL https://cache.agilebits.com/dist/1P/op/pkg/v0.5.5/op_${platform}_amd64_v0.5.5.zip -o op.zip \
+  && unzip op.zip \
+  && rm op.zip op.sig
